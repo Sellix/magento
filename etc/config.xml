@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+<default>
+    <payment>
+        <sellixpay>
+            <model>Sellix\Pay\Model\Pay</model>
+            <active>0</active>
+            <title>Sellix Pay</title>
+            <instructions>Pay with PayPal, Bitcoin, Ethereum, Litecoin and many more gateways via Sellix</instructions>
+            <order_id_prefix>Order #</order_id_prefix>
+            <payment_fields_layout>0</payment_fields_layout>
+            <confirmations>1</confirmations>
+            <paypal>0</paypal>
+            <stripe></stripe>
+            <bitcoin>0</bitcoin>
+            <concordium>0</concordium>
+            <tron>0</tron>
+            <litecoin>0</litecoin>
+            <ethereum>0</ethereum>
+            <bitcoin_cash>0</bitcoin_cash>
+            <usdt>0</usdt>
+            <usdt_erc20>0</usdt_erc20>
+            <usdt_bep20>0</usdt_bep20>
+            <usdt_trc20>0</usdt_trc20>
+            <usdc>0</usdc>
+            <usdc_erc20>0</usdc_erc20>
+            <usdc_bep20>0</usdc_bep20>
+            <solana>0</solana>
+            <nano>0</nano>
+            <ripple>0</ripple>
+            <cronos>0</cronos>
+            <binance_coin>0</binance_coin>
+            <binance_pay>0</binance_pay>
+            <monero>0</monero>
+            <skrill>0</skrill>
+            <perfectmoney>0</perfectmoney>
+        </sellixpay>
+    </payment>
+</default>
+</config>
