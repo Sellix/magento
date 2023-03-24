@@ -1,21 +1,34 @@
-# Magento Extension
+magento2-sellix-pay
+======================
 
-![](https://img.shields.io/badge/Sellix-Magento-blueviolet) ![](https://img.shields.io/badge/Version-v1.0.0-green)
+Sellix Pay Magento2 extension
 
-<p align="center">
-  <img src="https://cdn.sellix.io/cdn-cgi/image/w=500,h=500/static/logo/main.png" alt="Sellix Logo"/>
-</p>
+Install
+=======
 
-Magento extension to use Sellix as a Payment Gateway.
+1. Upload code to folder app/code/Sellix/Pay
 
-# Installation
+2.  Enter following commands to install module:
+    php bin/magento setup:upgrade
+    php bin/magento setup:static-content:deploy
 
-0. **Download** the latest release ZIP [on GitHub](https://github.com/Sellix/magento/releases).
+4. Enable and configure Sellix Pay in Magento Admin under Stores -> Configuration-> Sales -> Payment Methods -> Sellix Pay
 
-1. **Upload** the code to folder app/code/Sellix/Pay
+== Changelog ==
 
-1. Enter following commands to **install** module:
-   php bin/magento setup:upgrade
-   php bin/magento setup:static-content:deploy
+= 1.0.0 =
+* Initial release.
 
-2. **Enable** and **configure** Sellix Pay in Magento Admin under `Stores -> Configuration-> Sales -> Payment Methods -> Sellix Pay`
+== Upgrade Notice ==
+
+= 1.0.2 =
+- Added a new gateway: Cash App.
+- Added a new option: merchant can enable their own branded sellix pay checked url to their customers.
+- And updated Bitcoin Cash gateway value
+- And updated perfectmoney gateway value
+- Updated webhook to handle the 'PROCESSING' status received from sellix pay
+
+= 1.0.3 =
+- Removed layout selection, confirmations, sellix payment gateways enable/disable, and email configuration fields
+- Removed sellix payment gateway selection UI in the frontend.
+- Now it is redirected to gateway where customers will select the sub payment method selection

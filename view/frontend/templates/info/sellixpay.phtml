@@ -1,0 +1,16 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+/**
+ * @var $block \Sellix\Pay\Block\Info\Sellixpay
+ */
+?>
+<dl class="payment-method sellixpay">
+    <dt class="title"><?= $block->escapeHtml($block->getMethod()->getTitle()) ?></dt>
+    <dd class="content">
+        <strong><?= $block->escapeHtml(__('Selected Payment Gateway')) ?></strong>
+        <span class="number"><?= $block->escapeHtml($block->getSellixpayGateway()) ?></span>
+    </dd>
+</dl>
