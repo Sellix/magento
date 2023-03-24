@@ -1,33 +1,66 @@
 <?php
 namespace Sellix\Pay\Helper;
 
+use Sellix\Pay\Model\OrderFactory as SellixPayOrder;
+
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
+    /**
+     * @var \Magento\Framework\App\ResourceConnection $resource
+     */
     public $resource = '';
+    
+    /**
+     * @var Sellix\Pay\Model\OrderFactory $sellixpayOrder
+     */
+    protected $sellixpayOrder;
+    
+    /**
+     * Constructor
+     *
+     * @param \Magento\Framework\App\Helper\Context $context
+     * @param \Magento\Framework\App\ResourceConnection $resource
+     * @param SellixPayOrder $sellixpayOrder
+     */
     public function __construct(
         \Magento\Framework\App\Helper\Context $context,
-        \Magento\Framework\App\ResourceConnection $resource
+        \Magento\Framework\App\ResourceConnection $resource,
+        SellixPayOrder $sellixpayOrder
     ) {
         parent::__construct($context);
         $this->resource = $resource;
+        $this->sellixpayOrder = $sellixpayOrder;
     }
     
+    /**
+     * Get Transaction By Order Id
+     *
+     * @param string $order_id
+     */
     public function getTransactionByOrderId($order_id)
     {
-        $connection = $this->resource->getConnection();
-        $tableName = $this->resource->getTableName('sellixpay_order');
-        $query = "select * from {$tableName} where order_id=".(int)($order_id);
-        $result = $connection->fetchAll($query);
-        if ($result) {
-            foreach($result as $row) {
-                return $row;
-            }
+        $model = $this->sellixpayOrder->create();
+        $model = $model->load($order_id, 'order_id');
+        
+        if ($model && $model->getId() > 0) {
+            $row = [
+                'id' => $model->getId(),
+                'order_id' => $model->getOrderId(),
+                'response' => $model->getResponse(),
+            ];
+            return $row;
         } else {
             return false;
         }
     }
     
-    public function updateTransaction($order_id, $response='')
+    /**
+     * Update Transaction
+     *
+     * @param string $order_id
+     * @param string $response
+     */
+    public function updateTransaction($order_id, $response = '')
     {
         $connection = $this->resource->getConnection();
         $tableName = $this->resource->getTableName('sellixpay_order');
@@ -35,13 +68,13 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $transaction = $this->getTransactionByOrderId($order_id);
         if ($transaction) {
             $connection->update(
-                $tableName, 
+                $tableName,
                 ['response' => $response],
-                "order_id=".$order_id    
+                "order_id=".$order_id
             );
         } else {
             $connection->insert(
-                $tableName, 
+                $tableName,
                 ['response' => $response, 'order_id' => $order_id]
             );
         }

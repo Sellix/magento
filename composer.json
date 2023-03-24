@@ -1,10 +1,19 @@
 {
-    "name": "Sellix/Pay",
-    "description": "Sellix Pay",
+    "name": "sellix/pay",
+    "description": "Magento 2 Sellix Pay",
+    "require": {
+        "php": "^7.1|~8.1.0|~8.2.0"
+    },
     "type": "magento2-module",
-    "version": "1.0.0",
+    "version": "1.0.3",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
     "autoload": {
-        "files": [ "registration.php" ],
+        "files": [
+            "registration.php"
+        ],
         "psr-4": {
             "Sellix\\Pay\\": ""
         }

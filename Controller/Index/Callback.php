@@ -5,26 +5,58 @@ use Magento\Framework\Controller\ResultFactory;
 
 class Callback extends \Magento\Framework\App\Action\Action
 {
+    /**
+     * @var \Sellix\Pay\Helper\Data $helper
+     */
     protected $helper;
+    
+    /**
+     * @var \Sellix\Pay\Model\Pay $payment
+     */
     protected $payment;
+    
+    /**
+     * @var \Magento\Sales\Model\OrderFactory $orderFactory
+     */
     protected $orderFactory;
-
+    
+    /**
+     * @var \Magento\Checkout\Model\Session $checkoutSession
+     */
+    protected $checkoutSession;
+   
+    /**
+     * Constructor
+     *
+     * @param \Sellix\Pay\Helper\Data $helper
+     * @param \Sellix\Pay\Model\Pay $payment
+     * @param \Magento\Sales\Model\OrderFactory $orderFactory
+     * @param \Magento\Checkout\Model\Session $checkoutSession
+     * @param \Magento\Framework\App\Action\Context $context
+     */
     public function __construct(
         \Sellix\Pay\Helper\Data $helper,
         \Sellix\Pay\Model\Pay $payment,
         \Magento\Sales\Model\OrderFactory $orderFactory,
+        \Magento\Checkout\Model\Session $checkoutSession,
         \Magento\Framework\App\Action\Context $context
     ) {
         $this->helper = $helper;
         $this->payment = $payment;
         $this->orderFactory = $orderFactory;
+        $this->checkoutSession = $checkoutSession;
         parent::__construct($context);
     }
-
+    
+    /**
+     * Executor
+     *
+     * @return void
+     */
     public function execute()
     {
-        $model = $this->_objectManager->get('Sellix\Pay\Model\Pay');
-        $session = $this->_objectManager->get('Magento\Checkout\Model\Session');
+        $model = $this->payment;
+        $session = $this->checkoutSession;
         try {
             $params = $this->getRequest()->getParams();
             if (isset($params['order_id']) && !empty($params['order_id'])) {
@@ -32,7 +64,7 @@ class Callback extends \Magento\Framework\App\Action\Action
                 $order = $this->orderFactory->create()->loadByIncrementId($orderId);
                 return $this->getResponse()->setRedirect($model->getCheckoutSuccessUrl());
             } else {
-                throw new \Exception(__('Empty response received from gateway.'));
+                throw new \Magento\Framework\Exception\LocalizedException(__('Empty response received from gateway.'));
             }
         } catch (\Exception $e) {
             $error_message = $e->getMessage();

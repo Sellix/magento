@@ -1,8 +1,11 @@
 <?php
 namespace Sellix\Pay\Plugin;
+
 class CsrfValidatorSkip
 {
     /**
+     * Validate around CsrfValidator
+     *
      * @param \Magento\Framework\App\Request\CsrfValidator $subject
      * @param \Closure $proceed
      * @param \Magento\Framework\App\RequestInterface $request
