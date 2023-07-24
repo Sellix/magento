@@ -33,7 +33,7 @@ PayPal and regional banking methods with Sellix Pay.</strong>]]></comment>
                        sortOrder="27" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>API Key</label>
                     <validate>required-entry</validate>
-                    <comment>Please enter your Sellix email.</comment>
+                    <comment>Please enter your Sellix API Key.</comment>
                 </field>
                 <field id="url_branded" translate="label" type="select"
                        sortOrder="28" showInDefault="1" showInWebsite="1" showInStore="1">

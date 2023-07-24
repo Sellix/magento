@@ -112,7 +112,8 @@ class Pay extends \Magento\Framework\App\Action\Action
             'return_url' => $model->getCallbackUrl(['order_id' => $order->getId()]),
             'webhook' => $model->getWebhookUrl(['order_id' => $order->getId()]),
             'email' => $order->getCustomerEmail(),
-            'value' => number_format($order->getGrandTotal(), 2, '.', '')
+            'value' => number_format($order->getGrandTotal(), 2, '.', ''),
+            'origin' => 'MAGENTO_ADOBE'
         ];
 
         $route = "/v1/payments";
