@@ -222,9 +222,8 @@ class Pay extends \Magento\Payment\Model\Method\AbstractMethod
         $isAvailable = parent::isAvailable($quote);
         if ($isAvailable) {
             $api_key = $this->getConfigValue('api_key', $quote ? $quote->getStoreId() : null);
-            $email = $this->getConfigValue('email', $quote ? $quote->getStoreId() : null);
             
-            if (empty($api_key) || empty($email)) {
+            if (empty($api_key)) {
                 $isAvailable = false;
             }
         }
